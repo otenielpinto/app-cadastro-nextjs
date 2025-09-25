@@ -102,14 +102,6 @@ export const useFormValidation = () => {
         }
       } else if (step === 3) {
         // Validar contato
-        if (!formData.nomeComprador?.trim()) {
-          newErrors.nomeComprador = "Nome do comprador é obrigatório";
-          isValid = false;
-        }
-        if (!formData.whatsapp?.trim()) {
-          newErrors.whatsapp = "WhatsApp é obrigatório";
-          isValid = false;
-        }
         if (!formData.email?.trim()) {
           newErrors.email = "Email é obrigatório";
           isValid = false;
@@ -131,6 +123,7 @@ export const useFormValidation = () => {
 
   return {
     errors,
+    setErrors, // Expondo a função setErrors
     validateField,
     validateStep,
     clearErrors,

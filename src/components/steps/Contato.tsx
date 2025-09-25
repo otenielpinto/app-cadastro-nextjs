@@ -25,24 +25,6 @@ export default function Contato({ data, onChange, errors }: ContatoProps) {
       </h2>
 
       <div className="grid grid-cols-1 gap-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Nome do Comprador *
-          </label>
-          <input
-            type="text"
-            value={data.nomeComprador || ""}
-            onChange={(e) => onChange("nomeComprador", e.target.value)}
-            className={`input-field w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 ${
-              errors.nomeComprador ? "border-red-500" : "border-gray-300"
-            }`}
-            placeholder="Nome da pessoa responsável pelas compras"
-          />
-          {errors.nomeComprador && (
-            <p className="text-red-500 text-sm mt-1">{errors.nomeComprador}</p>
-          )}
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -75,21 +57,16 @@ export default function Contato({ data, onChange, errors }: ContatoProps) {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            WhatsApp *
+            WhatsApp
           </label>
           <input
             type="tel"
             value={data.whatsapp || ""}
             onChange={handlePhoneChange("whatsapp")}
-            className={`input-field w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 ${
-              errors.whatsapp ? "border-red-500" : "border-gray-300"
-            }`}
+            className={`input-field w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 border-gray-300`}
             placeholder="(11) 90000-0000"
             maxLength={15}
           />
-          {errors.whatsapp && (
-            <p className="text-red-500 text-sm mt-1">{errors.whatsapp}</p>
-          )}
         </div>
 
         <div>

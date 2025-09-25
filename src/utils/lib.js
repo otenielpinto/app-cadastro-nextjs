@@ -101,7 +101,7 @@ function stringOfChar(char, length) {
   return Array(length + 1).join(char);
 }
 
-function newUUId() {
+export function newUUId() {
   return uuidv4();
 }
 

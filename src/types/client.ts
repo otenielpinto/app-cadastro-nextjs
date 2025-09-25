@@ -8,6 +8,9 @@ export interface ClientData {
   cep: string;
   endereco: string;
   numero: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
   complemento: string;
   localEntrega: string;
 
@@ -22,7 +25,6 @@ export interface ClientData {
   almocoFim: string;
 
   // Contato
-  nomeComprador: string;
   telefoneFixo1: string;
   telefoneFixo2: string;
   whatsapp: string;

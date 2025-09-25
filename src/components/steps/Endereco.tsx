@@ -133,6 +133,63 @@ export default function Endereco({ data, onChange, errors }: EnderecoProps) {
           </div>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="md:col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Bairro *
+            </label>
+            <input
+              type="text"
+              value={data.bairro || ""}
+              onChange={(e) => onChange("bairro", e.target.value)}
+              className={`input-field w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 ${
+                errors.bairro ? "border-red-500" : "border-gray-300"
+              }`}
+              placeholder="Digite o bairro"
+            />
+            {errors.bairro && (
+              <p className="text-red-500 text-sm mt-1">{errors.bairro}</p>
+            )}
+          </div>
+
+          <div className="md:col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Cidade *
+            </label>
+            <input
+              type="text"
+              value={data.cidade || ""}
+              onChange={(e) => onChange("cidade", e.target.value)}
+              className={`input-field w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 ${
+                errors.cidade ? "border-red-500" : "border-gray-300"
+              }`}
+              placeholder="Digite a cidade"
+            />
+            {errors.cidade && (
+              <p className="text-red-500 text-sm mt-1">{errors.cidade}</p>
+            )}
+          </div>
+
+          <div className="md:col-span-1">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              UF *
+            </label>
+            <input
+              type="text"
+              value={data.uf || ""}
+              onChange={(e) => onChange("uf", e.target.value)}
+              className={`input-field w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 ${
+                errors.uf ? "border-red-500" : "border-gray-300"
+              }`}
+              placeholder="UF"
+              maxLength={2}
+            />
+            {errors.uf && (
+              <p className="text-red-500 text-sm mt-1">{errors.uf}</p>
+            )}
+          </div>
+        </div>
+
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Local de Entrega
@@ -183,7 +240,7 @@ export default function Endereco({ data, onChange, errors }: EnderecoProps) {
           {/* Dias da semana */}
           <div className="mb-4">
             <label className="block text-xs text-gray-600 mb-2">
-              Dias da Semana
+              Dias da Semana *
             </label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
               {diasSemana.map((dia) => (
