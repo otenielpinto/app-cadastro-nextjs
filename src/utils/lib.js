@@ -114,24 +114,6 @@ async function isCfopVenda(cfop) {
   return res;
 }
 
-async function extrairXmlNotaFiscal(obj) {
-  //estrutura adaptada para xml do tiny erp
-  if (!obj) return;
-  let xml = "";
-  try {
-    xml = obj?.retorno?.xml_nfe;
-  } catch (error) {}
-  return xml;
-}
-
-const toJSONObject = (rows = []) => {
-  try {
-    return rows[0];
-  } catch (error) {
-    return rows;
-  }
-};
-
 var monthNames = [
   "January",
   "February",
@@ -302,9 +284,6 @@ export const lib = {
 
   newUUId,
   isCfopVenda,
-
-  extrairXmlNotaFiscal,
-  toJSONObject,
 
   currentDateTimeStr,
   dateBrToSql,
