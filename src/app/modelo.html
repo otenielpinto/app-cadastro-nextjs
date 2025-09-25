@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+        
+        .step-active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .step-completed {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+        
+        .step-inactive {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .form-slide {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.4s ease;
+            display: none;
+        }
+        
+        .form-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            display: block;
+        }
+        
+        .input-field {
+            transition: all 0.2s ease;
+        }
+        
+        .input-field:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Cadastro de Clientes</h1>
+            <p class="text-gray-600">Preencha os dados para completar o cadastro</p>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="flex justify-center mb-8">
+            <div class="flex items-center space-x-4">
+                <div class="step-indicator step-active w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg" id="step1">1</div>
+                <div class="w-16 h-1 bg-gray-300" id="line1"></div>
+                <div class="step-indicator step-inactive w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg" id="step2">2</div>
+                <div class="w-16 h-1 bg-gray-300" id="line2"></div>
+                <div class="step-indicator step-inactive w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg" id="step3">3</div>
+            </div>
+        </div>
+
+        <!-- Step Labels -->
+        <div class="flex justify-center mb-8">
+            <div class="flex space-x-16 text-sm font-medium">
+                <span class="text-indigo-600" id="label1">Dados Básicos</span>
+                <span class="text-gray-400" id="label2">Endereço</span>
+                <span class="text-gray-400" id="label3">Contato</span>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+            
+            <form id="clientForm">
+                <!-- Página 1: Dados Básicos -->
+                <div class="form-slide active" id="page1">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Dados Básicos</h2>
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo / Razão Social *</label>
+                            <input type="text" id="nomeCompleto" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Digite o nome completo ou razão social" required>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">CPF / CNPJ *</label>
+                                <input type="text" id="cpfCnpj" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="000.000.000-00" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Inscrição Estadual</label>
+                                <input type="text" id="inscricaoEstadual" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Caso não possui deixar campo em branco">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Página 2: Endereço -->
+                <div class="form-slide" id="page2">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Endereço</h2>
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">CEP *</label>
+                                <input type="text" id="cep" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="00000-000" required>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Endereço *</label>
+                                <input type="text" id="endereco" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Digite o endereço completo" required>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Número *</label>
+                                <input type="text" id="numero" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Nº" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Complemento</label>
+                                <input type="text" id="complemento" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Apto, sala, etc.">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Local de Entrega</label>
+                            <textarea id="localEntrega" rows="3" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Preencher apenas caso o endereço seja diferente do vinculado ao seu CNPJ / CPF"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Horário de Recebimento</label>
+                            
+                            <!-- Horário de funcionamento -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs text-gray-600 mb-1">Horário de Início</label>
+                                    <input type="time" id="horarioInicio" class="input-field w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                </div>
+                                <div class="flex items-end justify-center">
+                                    <span class="text-gray-500 font-medium pb-2">às</span>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-600 mb-1">Horário de Término</label>
+                                    <input type="time" id="horarioFim" class="input-field w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                </div>
+                            </div>
+                            
+                            <!-- Dias da semana -->
+                            <div class="mb-4">
+                                <label class="block text-xs text-gray-600 mb-2">Dias da Semana</label>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox" id="segunda" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <span class="text-sm">Segunda</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox" id="terca" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <span class="text-sm">Terça</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox" id="quarta" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <span class="text-sm">Quarta</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox" id="quinta" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <span class="text-sm">Quinta</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox" id="sexta" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <span class="text-sm">Sexta</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox" id="sabado" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <span class="text-sm">Sábado</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 cursor-pointer">
+                                        <input type="checkbox" id="domingo" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                        <span class="text-sm">Domingo</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Horário de almoço -->
+                            <div>
+                                <label class="flex items-center space-x-2 cursor-pointer mb-2">
+                                    <input type="checkbox" id="temAlmoco" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <span class="text-sm font-medium text-gray-700">Tem horário de fechamento para almoço</span>
+                                </label>
+                                
+                                <div id="horarioAlmoco" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2 opacity-50 pointer-events-none">
+                                    <div>
+                                        <label class="block text-xs text-gray-600 mb-1">Início do Almoço</label>
+                                        <input type="time" id="almocoInicio" class="input-field w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                    </div>
+                                    <div class="flex items-end justify-center">
+                                        <span class="text-gray-500 font-medium pb-2">às</span>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs text-gray-600 mb-1">Fim do Almoço</label>
+                                        <input type="time" id="almocoFim" class="input-field w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Página 3: Contato -->
+                <div class="form-slide" id="page3">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Informações de Contato</h2>
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome do Comprador *</label>
+                            <input type="text" id="nomeComprador" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="Nome da pessoa responsável pelas compras" required>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Telefone Fixo</label>
+                                <input type="tel" id="telefoneFixo1" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="(11) 0000-0000">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Telefone Fixo 2</label>
+                                <input type="tel" id="telefoneFixo2" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="(11) 0000-0000">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">WhatsApp *</label>
+                            <input type="tel" id="whatsapp" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="(11) 90000-0000" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                            <input type="email" id="email" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="email@exemplo.com" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email para envio da Nota Fiscal</label>
+                            <input type="email" id="emailNF" class="input-field w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent" placeholder="nf@exemplo.com">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                <button type="button" id="prevBtn" class="btn-secondary px-6 py-3 text-white font-medium rounded-lg shadow-lg" style="display: none;">
+                    ← Anterior
+                </button>
+                
+                <div class="flex-1"></div>
+                
+                <button type="button" id="nextBtn" class="btn-primary px-6 py-3 text-white font-medium rounded-lg shadow-lg">
+                    Próximo →
+                </button>
+                
+                <button type="button" id="submitBtn" class="btn-primary px-8 py-3 text-white font-medium rounded-lg shadow-lg" style="display: none;">
+                    ✓ Finalizar Cadastro
+                </button>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="hidden mt-8 bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+            <div class="text-green-600 text-6xl mb-4">✓</div>
+            <h3 class="text-2xl font-semibold text-green-800 mb-2">Cadastro Realizado com Sucesso!</h3>
+            <p class="text-green-700">Os dados do cliente foram salvos com sucesso.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        // Elementos
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const form = document.getElementById('clientForm');
+        const successMessage = document.getElementById('successMessage');
+
+        // Navegação
+        function showStep(step) {
+            // Esconder todas as páginas
+            document.querySelectorAll('.form-slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Mostrar página atual
+            document.getElementById(page${step}).classList.add('active');
+            
+            // Atualizar indicadores de progresso
+            updateProgressIndicators(step);
+            
+            // Atualizar botões
+            updateButtons(step);
+        }
+
+        function updateProgressIndicators(step) {
+            for (let i = 1; i <= totalSteps; i++) {
+                const stepElement = document.getElementById(step${i});
+                const labelElement = document.getElementById(label${i});
+                
+                if (i < step) {
+                    stepElement.className = 'step-indicator step-completed w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg';
+                    labelElement.className = 'text-green-600';
+                } else if (i === step) {
+                    stepElement.className = 'step-indicator step-active w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg';
+                    labelElement.className = 'text-indigo-600';
+                } else {
+                    stepElement.className = 'step-indicator step-inactive w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg';
+                    labelElement.className = 'text-gray-400';
+                }
+            }
+        }
+
+        function updateButtons(step) {
+            prevBtn.style.display = step === 1 ? 'none' : 'block';
+            nextBtn.style.display = step === totalSteps ? 'none' : 'block';
+            submitBtn.style.display = step === totalSteps ? 'block' : 'none';
+        }
+
+        function validateCurrentStep() {
+            const currentPage = document.getElementById(page${currentStep});
+            const requiredFields = currentPage.querySelectorAll('input[required], textarea[required]');
+            
+            for (let field of requiredFields) {
+                if (!field.value.trim()) {
+                    field.focus();
+                    field.classList.add('border-red-500');
+                    setTimeout(() => field.classList.remove('border-red-500'), 3000);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', () => {
+            if (validateCurrentStep() && currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        submitBtn.addEventListener('click', () => {
+            if (validateCurrentStep()) {
+                // Simular envio do formulário
+                const formData = new FormData(form);
+                
+                // Coletar dados dos dias da semana
+                const diasSemana = [];
+                ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'domingo'].forEach(dia => {
+                    if (document.getElementById(dia).checked) {
+                        diasSemana.push(dia);
+                    }
+                });
+
+                // Coletar todos os dados
+                const clientData = {
+                    nomeCompleto: document.getElementById('nomeCompleto').value,
+                    cpfCnpj: document.getElementById('cpfCnpj').value,
+                    inscricaoEstadual: document.getElementById('inscricaoEstadual').value,
+                    cep: document.getElementById('cep').value,
+                    endereco: document.getElementById('endereco').value,
+                    numero: document.getElementById('numero').value,
+                    complemento: document.getElementById('complemento').value,
+                    localEntrega: document.getElementById('localEntrega').value,
+                    horarioInicio: document.getElementById('horarioInicio').value,
+                    horarioFim: document.getElementById('horarioFim').value,
+                    diasSemana: diasSemana,
+                    temAlmoco: document.getElementById('temAlmoco').checked,
+                    almocoInicio: document.getElementById('almocoInicio').value,
+                    almocoFim: document.getElementById('almocoFim').value,
+                    nomeComprador: document.getElementById('nomeComprador').value,
+                    telefoneFixo1: document.getElementById('telefoneFixo1').value,
+                    telefoneFixo2: document.getElementById('telefoneFixo2').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    email: document.getElementById('email').value,
+                    emailNF: document.getElementById('emailNF').value
+                };
+
+                console.log('Dados do cliente:', clientData);
+                
+                // Mostrar mensagem de sucesso
+                document.querySelector('.bg-white.rounded-2xl').style.display = 'none';
+                successMessage.classList.remove('hidden');
+                
+                // Scroll para o topo
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // Máscaras para campos
+        document.getElementById('cpfCnpj').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            } else {
+                value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+            }
+            e.target.value = value;
+        });
+
+        document.getElementById('cep').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{5})(\d{3})/, '$1-$2');
+            e.target.value = value;
+        });
+
+        // Máscara para telefones
+        function phoneMask(input) {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length <= 10) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+                } else {
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                }
+                e.target.value = value;
+            });
+        }
+
+        phoneMask(document.getElementById('telefoneFixo1'));
+        phoneMask(document.getElementById('telefoneFixo2'));
+        phoneMask(document.getElementById('whatsapp'));
+
+        // Controle do horário de almoço
+        document.getElementById('temAlmoco').addEventListener('change', function() {
+            const horarioAlmoco = document.getElementById('horarioAlmoco');
+            if (this.checked) {
+                horarioAlmoco.classList.remove('opacity-50', 'pointer-events-none');
+                horarioAlmoco.classList.add('opacity-100');
+            } else {
+                horarioAlmoco.classList.add('opacity-50', 'pointer-events-none');
+                horarioAlmoco.classList.remove('opacity-100');
+                // Limpar campos quando desabilitado
+                document.getElementById('almocoInicio').value = '';
+                document.getElementById('almocoFim').value = '';
+            }
+        });
+
+        // Inicializar
+        showStep(1);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97a6235cc0838a83',t:'MTc1NzA3OTYyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
