@@ -46,11 +46,13 @@ src/
 ## 🎯 Etapas do Formulário
 
 ### 1. Dados Básicos
+
 - Nome Completo / Razão Social
 - CPF / CNPJ (com máscara automática)
 - Inscrição Estadual (opcional)
 
 ### 2. Endereço
+
 - CEP (com máscara)
 - Endereço completo
 - Número e complemento
@@ -60,6 +62,7 @@ src/
 - Horário de almoço (opcional)
 
 ### 3. Contato
+
 - Nome do comprador
 - Telefones fixos
 - WhatsApp (obrigatório)
@@ -69,17 +72,20 @@ src/
 ## 🚀 Como Executar
 
 1. **Clone o repositório**
+
    ```bash
    git clone <url-do-repositorio>
    cd app-cadastro-nextjs
    ```
 
 2. **Instale as dependências**
+
    ```bash
    npm install
    ```
 
 3. **Execute o servidor de desenvolvimento**
+
    ```bash
    npm run dev
    ```
@@ -90,6 +96,7 @@ src/
 ## 📱 Responsividade
 
 O sistema é totalmente responsivo, adaptando-se automaticamente para:
+
 - Desktop (1024px+)
 - Tablet (768px - 1023px)
 - Mobile (até 767px)
