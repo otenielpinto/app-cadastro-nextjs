@@ -61,11 +61,54 @@ body {
 
 .input-field {
   transition: all 0.2s ease;
+  background-color: #ffffff;
+  color: #1f2937;
 }
 
 .input-field:focus {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+  background-color: #ffffff;
+  color: #111827;
+}
+
+.input-field::placeholder {
+  color: #9ca3af;
+}
+
+/* Estilos específicos para garantir contraste adequado */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="time"],
+textarea,
+select {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="time"]::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Estilos para campos com erro */
+.input-field.border-red-500 {
+  background-color: #fef2f2 !important;
+  color: #1f2937 !important;
 }
 
 .btn-primary {
@@ -86,4 +129,80 @@ body {
 .btn-secondary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+}
+
+/* Classes utilitárias para contraste */
+.text-high-contrast {
+  color: #1f2937 !important;
+}
+
+.bg-input-light {
+  background-color: #ffffff !important;
+}
+
+.placeholder-medium {
+  color: #9ca3af !important;
+}
+
+/* Garantir que labels tenham bom contraste */
+label {
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+/* Estilos para checkboxes */
+input[type="checkbox"] {
+  accent-color: #4f46e5 !important;
+  width: 1.125rem !important;
+  height: 1.125rem !important;
+}
+
+/* Estilos para campos desabilitados */
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: #f9fafb !important;
+  color: #6b7280 !important;
+  border-color: #e5e7eb !important;
+  cursor: not-allowed !important;
+}
+
+/* Melhorar contraste dos textos em labels pequenas */
+.text-xs {
+  color: #6b7280 !important;
+  font-weight: 500 !important;
+}
+
+/* Melhorar contraste em modo escuro também */
+@media (prefers-color-scheme: dark) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="time"],
+  textarea,
+  select {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    border-color: #d1d5db !important;
+  }
+
+  label {
+    color: #374151 !important;
+  }
+
+  .input-field {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+  }
+
+  input[type="checkbox"] {
+    accent-color: #4f46e5 !important;
+  }
+
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    background-color: #f9fafb !important;
+    color: #6b7280 !important;
+  }
 }
