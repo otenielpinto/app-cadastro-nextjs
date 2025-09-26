@@ -36,6 +36,8 @@ export interface TinyContactPayload {
     situacao?: "A" | "I" | "E";
     obs?: string;
     contribuinte?: "1" | "2" | "9";
+    tipos_contato?: { tipo: string }[];
+    email_nfe?: string;
   };
 }
 
@@ -93,16 +95,23 @@ export function toTinyContactPayload(
       pais: "Brasil",
       contatos: clientData.nomeCompleto || "",
       fone: clientData.telefoneFixo1 || "",
-      fax: "", // Campo não presente no formulário
+      fax: clientData.telefoneFixo2 || "",
       celular: clientData.whatsapp || "",
       email: clientData.email || "",
       // id_vendedor: "", // A ser definido se necessário
       situacao: "A" as const, // "A" para Ativo
       obs: obs,
+      tipos_contato: [
+        {
+          tipo: "Cliente",
+        },
+      ],
+
       // 1 - Contribuinte ICMS, 2 - Contribuinte Isento, 9 - Não Contribuinte
       contribuinte: clientData.inscricaoEstadual
         ? ("1" as const)
         : ("9" as const),
+      email_nfe: clientData.emailNF || "",
     },
   };
 

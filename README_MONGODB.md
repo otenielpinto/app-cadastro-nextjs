@@ -30,8 +30,8 @@ Criar arquivo `.env.local`:
 
 ```bash
 # Para MongoDB Local
-MONGO_CONNECTION=mongodb://localhost:27017
-MONGO_DATABASE=embalamix
+MONGO_CONNECTION=
+MONGO_DATABASE=
 
 # Para MongoDB Atlas
 # MONGO_CONNECTION=mongodb+srv://username:password@cluster.mongodb.net/

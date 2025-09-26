@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cadastro de Clientes - Embalamix",
+  title: "Cadastro de Clientes - Nova Santo Antonio Embalagens",
   description: "Sistema de cadastro de clientes com formulário multi-step",
 };
 

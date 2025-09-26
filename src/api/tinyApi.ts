@@ -21,7 +21,7 @@ interface TinyApiResponse {
 export const tinyApi = async (
   apiUrl: string,
   data: TinyApiParams[] = [],
-  method: "GET" | "POST" = "GET"
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" = "GET"
 ): Promise<TinyApiResponse | null> => {
   let body = "";
   let contentData = "";
